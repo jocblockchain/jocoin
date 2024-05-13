@@ -290,7 +290,7 @@ public:
 
         // Deployment of MWEB (LIP-0002 and LIP-0003)
         consensus.vDeployments[Consensus::DEPLOYMENT_MWEB].bit = 4;
-        consensus.vDeployments[Consensus::DEPLOYMENT_MWEB].nStartTime = 1715567470; // September 30, 2020
+        consensus.vDeployments[Consensus::DEPLOYMENT_MWEB].nStartTime = 1601450001; // September 30, 2020
         consensus.vDeployments[Consensus::DEPLOYMENT_MWEB].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
         consensus.nMinimumChainWork = uint256{};
@@ -307,9 +307,9 @@ public:
 
         UpdateActivationParametersFromArgs(args);
 
-        genesis = CreateGenesisBlock(1715567470, 3, 0x207fffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1715593041, 0, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0xf6df64f7140d930f5d84b3d1483bf47e29bc96313916dcf1d9cd6864061c2560"));
+        assert(consensus.hashGenesisBlock == uint256S("0xe310d360964c6348f5a1884a7d48794a11cf29e05126d96337d546310642f336"));
         assert(genesis.hashMerkleRoot == uint256S("0x04a6be1cd2183710477e4917f2f27c2aed953304814afed8dc6a1aca7b67086d"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
@@ -322,7 +322,7 @@ public:
 
         checkpointData = {
             {
-                {0, uint256S("f6df64f7140d930f5d84b3d1483bf47e29bc96313916dcf1d9cd6864061c2560")},
+                {0, uint256S("e310d360964c6348f5a1884a7d48794a11cf29e05126d96337d546310642f336")},
             }
         };
 
