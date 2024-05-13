@@ -61,7 +61,7 @@ If you're using the automated script (found in [contrib/gitian-build.py](/contri
 Check out the source code in the following directory hierarchy.
 
     cd /path/to/your/toplevel/build
-    git clone https://github.com/jocblockchain/gitian.sigs.ltc.git
+    git clone https://github.com/jocblockchain/gitian.sigs.joco.git
     git clone https://github.com/jocblockchain/jocoin-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
     git clone https://github.com/jocblockchain/jocoin.git
@@ -96,9 +96,9 @@ Setup Gitian descriptors:
     git checkout v${VERSION}
     popd
 
-Ensure your gitian.sigs.ltc are up-to-date if you wish to gverify your builds against other Gitian signatures.
+Ensure your gitian.sigs.joco are up-to-date if you wish to gverify your builds against other Gitian signatures.
 
-    pushd ./gitian.sigs.ltc
+    pushd ./gitian.sigs.joco
     git pull
     popd
 
@@ -145,16 +145,16 @@ The gbuild invocations below <b>DO NOT DO THIS</b> by default.
     
     pushd ./gitian-builder
     ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit jocoin=v${VERSION} ../jocoin/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-linux --destination ../gitian.sigs.ltc/ ../jocoin/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-linux --destination ../gitian.sigs.joco/ ../jocoin/contrib/gitian-descriptors/gitian-linux.yml
     mv build/out/jocoin-*.tar.gz build/out/src/jocoin-*.tar.gz ../
 
     ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit jocoin=v${VERSION} ../jocoin/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-unsigned --destination ../gitian.sigs.ltc/ ../jocoin/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-unsigned --destination ../gitian.sigs.joco/ ../jocoin/contrib/gitian-descriptors/gitian-win.yml
     mv build/out/jocoin-*-win-unsigned.tar.gz inputs/jocoin-win-unsigned.tar.gz
     mv build/out/jocoin-*.zip build/out/jocoin-*.exe ../
 
     ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit jocoin=v${VERSION} ../jocoin/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../gitian.sigs.ltc/ ../jocoin/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../gitian.sigs.joco/ ../jocoin/contrib/gitian-descriptors/gitian-osx.yml
     mv build/out/jocoin-*-osx-unsigned.tar.gz inputs/jocoin-osx-unsigned.tar.gz
     mv build/out/jocoin-*.tar.gz build/out/jocoin-*.dmg ../
     popd
@@ -165,7 +165,7 @@ Build output expected:
   2. linux 32-bit and 64-bit dist tarballs (`jocoin-${VERSION}-linux[32|64].tar.gz`)
   3. windows 32-bit and 64-bit unsigned installers and dist zips (`jocoin-${VERSION}-win[32|64]-setup-unsigned.exe`, `jocoin-${VERSION}-win[32|64].zip`)
   4. macOS unsigned installer and dist tarball (`jocoin-${VERSION}-osx-unsigned.dmg`, `jocoin-${VERSION}-osx64.tar.gz`)
-  5. Gitian signatures (in `gitian.sigs.ltc/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
+  5. Gitian signatures (in `gitian.sigs.joco/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
@@ -174,16 +174,16 @@ Add other gitian builders keys to your gpg keyring, and/or refresh keys: See `..
 Verify the signatures
 
     pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-linux ../jocoin/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-win-unsigned ../jocoin/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-unsigned ../jocoin/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gverify -v -d ../gitian.sigs.joco/ -r ${VERSION}-linux ../jocoin/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gverify -v -d ../gitian.sigs.joco/ -r ${VERSION}-win-unsigned ../jocoin/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gverify -v -d ../gitian.sigs.joco/ -r ${VERSION}-osx-unsigned ../jocoin/contrib/gitian-descriptors/gitian-osx.yml
     popd
 
 ### Next steps:
 
-Commit your signature to gitian.sigs.ltc:
+Commit your signature to gitian.sigs.joco:
 
-    pushd gitian.sigs.ltc
+    pushd gitian.sigs.joco
     git add ${VERSION}-linux/"${SIGNER}"
     git add ${VERSION}-win-unsigned/"${SIGNER}"
     git add ${VERSION}-osx-unsigned/"${SIGNER}"
@@ -259,8 +259,8 @@ Create (and optionally verify) the signed macOS binary:
 
     pushd ./gitian-builder
     ./bin/gbuild -i --commit signature=v${VERSION} ../jocoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-signed --destination ../gitian.sigs.ltc/ ../jocoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-signed ../jocoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-signed --destination ../gitian.sigs.joco/ ../jocoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs.joco/ -r ${VERSION}-osx-signed ../jocoin/contrib/gitian-descriptors/gitian-osx-signer.yml
     mv build/out/jocoin-osx-signed.dmg ../jocoin-${VERSION}-osx.dmg
     popd
 
@@ -275,11 +275,11 @@ Create (and optionally verify) the signed Windows binaries:
 
 Commit your signature for the signed macOS/Windows binaries:
 
-    pushd gitian.sigs.ltc
+    pushd gitian.sigs.joco
     git add ${VERSION}-osx-signed/"${SIGNER}"
     git add ${VERSION}-win-signed/"${SIGNER}"
     git commit -m "Add ${SIGNER} ${VERSION} signed binaries signatures"
-    git push  # Assuming you can push to the gitian.sigs.ltc tree
+    git push  # Assuming you can push to the gitian.sigs.joco tree
     popd
 
 ### After 3 or more people have gitian-built and their results match:
