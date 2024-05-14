@@ -83,8 +83,8 @@ src/qt/bitcoin-qt.includes
 *.raw.h
 
 # Only ignore unexpected patches
-*.patch
-!depends/patches/**/*.patch
+#*.patch
+#!depends/patches/**/*.patch
 
 #libtool object files
 *.lo
@@ -93,7 +93,7 @@ src/qt/bitcoin-qt.includes
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-!depends/Makefile
+#!depends/Makefile
 src/qt/litecoin-qt
 Litecoin-Qt.app
 background.tiff*
