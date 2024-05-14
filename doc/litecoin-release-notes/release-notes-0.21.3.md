@@ -1,6 +1,6 @@
 Jocoin Core version 0.21.3 is now available from:
 
- <https://download.jocoin.org/jocoin-0.21.3/>.
+ <https://download.jocoin.io/jocoin-0.21.3/>.
 
 This is a new patch version release that includes, new features and important security updates.
 
