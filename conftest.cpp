@@ -75,5 +75,17 @@
 #define HAVE_MINIUPNPC_MINIWGET_H 1
 #define HAVE_MINIUPNPC_MINIUPNPC_H 1
 #define HAVE_MINIUPNPC_UPNPCOMMANDS_H 1
+#define HAVE_MINIUPNPC_UPNPERRORS_H 1
+#define HAVE_BOOST /**/
+#define HAVE_BOOST_SYSTEM /**/
 /* end confdefs.h.  */
-#include <miniupnpc/upnperrors.h>
+#include <boost/filesystem/path.hpp>
+int
+main ()
+{
+using namespace boost::filesystem;
+                                   path my_path( "foo/bar/data.txt" );
+                                   return 0;
+  ;
+  return 0;
+}
